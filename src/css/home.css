@@ -1,0 +1,268 @@
+@charset "utf-8";
+
+/* Hero */
+.home-hero {
+    min-height: 600px;
+    padding: 110px 0 30px;
+    background: linear-gradient(125deg, #faf8f4, #f0e9df);
+}
+
+.hero-label,
+.section-label {
+    margin-bottom: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #9a8168;
+}
+
+.home-hero h2 {
+    font-size: 76px;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -4px;
+    color: #302d29;
+}
+
+.home-hero h2 span {
+    color: #a38c73;
+}
+
+.hero-description {
+    margin-top: 28px;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #746c63;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 35px;
+}
+
+.hero-bottom {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #a19587;
+}
+
+/* Explore */
+.home-explore {
+    padding: 110px 0 130px;
+    background: #fffdf9;
+}
+
+.section-heading {
+    margin-bottom: 45px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.section-heading h2,
+.home-share h2 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    color: #302d29;
+}
+
+.section-heading>p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #81786e;
+}
+
+.explore-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.explore-card {
+    min-height: 310px;
+    padding: 38px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #f7f3ed;
+    border: 1px solid #e9e2d8;
+    transition: 0.25s;
+}
+
+.explore-card:nth-child(2) {
+    background: #f1ebe3;
+}
+
+.explore-card:hover {
+    transform: translateY(-5px);
+    border-color: #c7b6a3;
+}
+
+.explore-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fffdf9;
+    color: #8b7866;
+}
+
+.explore-info {
+    margin-top: auto;
+}
+
+.explore-info span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #9b8976;
+}
+
+.explore-info h3 {
+    margin: 10px 0;
+    font-size: 29px;
+    letter-spacing: -1px;
+    color: #302d29;
+}
+
+.explore-info p {
+    font-size: 14px;
+    color: #81786e;
+}
+
+.explore-arrow {
+    position: absolute;
+    right: 38px;
+    bottom: 42px;
+    color: #776653;
+}
+
+/* Share */
+.home-share {
+    padding: 85px 0;
+    background: #f1ece4;
+}
+
+.share-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.home-share h2 {
+    margin-bottom: 18px;
+}
+
+.home-share p:not(.section-label) {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #80776d;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .home-hero h2 {
+        font-size: 62px;
+    }
+
+    .explore-card {
+        padding: 28px;
+    }
+
+    .explore-arrow {
+        right: 28px;
+        bottom: 35px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .home-hero {
+        min-height: 550px;
+        padding: 80px 0 25px;
+    }
+
+    .home-hero h2 {
+        font-size: 46px;
+        letter-spacing: -2px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-outline {
+        min-height: 48px;
+        padding: 0 18px;
+        font-size: 12px;
+    }
+
+    .hero-bottom {
+        margin-top: 85px;
+        font-size: 9px;
+    }
+
+    .home-explore {
+        padding: 75px 0;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .section-heading h2,
+    .home-share h2 {
+        font-size: 32px;
+    }
+
+    .section-heading>p {
+        margin-top: 18px;
+        font-size: 13px;
+    }
+
+    .explore-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .explore-card {
+        min-height: 270px;
+        padding: 25px;
+    }
+
+    .explore-info h3 {
+        font-size: 25px;
+    }
+
+    .explore-info p {
+        padding-right: 25px;
+        font-size: 12px;
+    }
+
+    .home-share {
+        padding: 70px 0;
+    }
+
+    .share-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .home-share p:not(.section-label) {
+        font-size: 13px;
+    }
+}
