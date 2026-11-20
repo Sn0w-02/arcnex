@@ -12,7 +12,7 @@
     background: linear-gradient(115deg, #f8f5f0 0%, #e8dfd4 100%);
 }
 
-.gallery-hero__inner {
+.container.gallery-hero__inner {
     position: relative;
     z-index: 1;
     padding-top: 62px;
@@ -83,7 +83,7 @@
     opacity: .22;
 }
 
-.gallery-main {
+.container.gallery-main {
     padding-top: 34px;
     padding-bottom: 100px;
 }
@@ -277,7 +277,7 @@
         min-height: 240px;
     }
 
-    .gallery-hero__inner {
+    .container.gallery-hero__inner {
         padding-top: 54px;
         padding-bottom: 45px;
     }
@@ -309,7 +309,7 @@
         width: 100%;
     }
 
-    .gallery-main {
+    .container.gallery-main {
         padding-bottom: 65px;
     }
 }

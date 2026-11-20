@@ -1,5 +1,5 @@
-// Unsplash 이미지 URL 샘플. Supabase 연동 시 이 데이터 배열을 조회 결과로 교체하세요.
-// 실제 좋아요/다운로드 수가 아닌 UI 테스트용 값입니다.
+// Supabase 연동 시 교체
+// 실제 좋아요/다운로드 수가 아닌 UI 테스트용 값
 export const galleryAssets = [
   { id: 'demo-01', title: 'Quiet Mountains', category: 'Nature', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85', likes: 37, downloads: 180 },
   { id: 'demo-02', title: 'Dried Flowers', category: 'Art', imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=85', likes: 54, downloads: 260 },
