@@ -279,3 +279,12 @@
     }
 
 }
+
+.models-card__preview>svg {
+    color: #a18c70;
+}
+
+.models-card__like:disabled {
+    opacity: .5;
+    cursor: wait;
+}
