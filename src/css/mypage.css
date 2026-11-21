@@ -1,0 +1,213 @@
+@import './login.css';
+
+.mypage-page {
+    padding: 70px 24px 110px
+}
+
+.mypage-container {
+    width: min(1160px, 100%);
+    margin: 0 auto
+}
+
+.mypage-heading h1 {
+    font-size: clamp(38px, 5vw, 58px);
+    letter-spacing: -.055em;
+    margin: 16px 0
+}
+
+.mypage-heading p {
+    color: #86827b
+}
+
+.mypage-profile {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    padding: 30px;
+    margin: 42px 0 24px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid #ebe8e1
+}
+
+.mypage-avatar {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    flex: none;
+    border-radius: 50%;
+    background: #eae3d8;
+    color: #a58e70
+}
+
+.mypage-profile small {
+    font-size: 11px;
+    letter-spacing: .14em;
+    color: #a18b6f
+}
+
+.mypage-profile h2 {
+    font-size: 22px;
+    margin: 6px 0
+}
+
+.mypage-profile p {
+    font-size: 13px;
+    color: #92908a;
+    margin: 0
+}
+
+.mypage-profile>a,
+.mypage-library-top>a,
+.mypage-empty>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #514537
+}
+
+.mypage-profile>a {
+    margin-left: auto
+}
+
+.mypage-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px
+}
+
+.mypage-stats>div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #ebe8e1;
+    border-radius: 14px;
+    padding: 24px
+}
+
+.mypage-stats svg {
+    color: #b5a187
+}
+
+.mypage-stats strong {
+    font-size: 31px
+}
+
+.mypage-stats span {
+    font-size: 13px;
+    color: #8c8982
+}
+
+.mypage-library {
+    background: #fff;
+    border: 1px solid #ebe8e1;
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 24px
+}
+
+.mypage-library-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center
+}
+
+.mypage-library-top h2 {
+    font-size: 21px;
+    margin: 0 0 8px
+}
+
+.mypage-library-top p {
+    font-size: 13px;
+    color: #928e87;
+    margin: 0
+}
+
+.mypage-tabs {
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid #ece9e3;
+    margin-top: 32px
+}
+
+.mypage-tabs button {
+    border: 0;
+    background: none;
+    padding: 0 0 16px;
+    color: #92908a
+}
+
+.mypage-tabs button.active {
+    font-weight: 700;
+    color: #252523;
+    border-bottom: 2px solid #252523
+}
+
+.mypage-empty {
+    min-height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center
+}
+
+.mypage-empty>svg {
+    color: #b9ae9e
+}
+
+.mypage-empty h3 {
+    font-size: 18px;
+    margin: 18px 0 5px
+}
+
+.mypage-empty p {
+    font-size: 13px;
+    color: #999
+}
+
+.mypage-empty a {
+    margin-top: 15px
+}
+
+@media(max-width:650px) {
+    .mypage-page {
+        padding: 48px 20px 70px
+    }
+
+    .mypage-profile {
+        flex-wrap: wrap;
+        padding: 20px
+    }
+
+    .mypage-profile>a {
+        margin-left: 0;
+        width: 100%
+    }
+
+    .mypage-stats {
+        gap: 9px
+    }
+
+    .mypage-stats>div {
+        padding: 15px
+    }
+
+    .mypage-stats strong {
+        font-size: 24px
+    }
+
+    .mypage-library {
+        padding: 20px
+    }
+
+    .mypage-library-top {
+        align-items: start;
+        flex-direction: column
+    }
+}

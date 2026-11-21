@@ -12,11 +12,14 @@ import Upload from './pages/Upload'
 import Login from './pages/Login'
 import MyPage from './pages/MyPage'
 
+import ProtectedRoute from './components/ProtectedRoute'
+import { AuthProvider } from './context/AuthContext'
+
 import './css/common.css'
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Header />
 
       <main>
@@ -26,14 +29,16 @@ function App() {
           <Route path="/gallery/:id" element={<AssetDetail type="image" />} />
           <Route path="/models" element={<Models />} />
           <Route path="/models/:id" element={<AssetDetail type="model" />} />
-          <Route path="/upload" element={<Upload />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/upload" element={<Upload />} />
+            <Route path="/mypage" element={<MyPage />} />
+          </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/mypage" element={<MyPage />} />
         </Routes>
       </main>
 
       <Footer />
-    </>
+    </AuthProvider>
   )
 }
 
