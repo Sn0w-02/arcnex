@@ -1,22 +1,22 @@
 @import './login.css';
 
 .mypage-page {
-    padding: 70px 24px 110px
+    padding: 70px 24px 110px;
 }
 
 .mypage-container {
     width: min(1160px, 100%);
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 .mypage-heading h1 {
     font-size: clamp(38px, 5vw, 58px);
     letter-spacing: -.055em;
-    margin: 16px 0
+    margin: 16px 0;
 }
 
 .mypage-heading p {
-    color: #86827b
+    color: #86827b;
 }
 
 .mypage-profile {
@@ -27,7 +27,7 @@
     margin: 42px 0 24px;
     border-radius: 16px;
     background: #fff;
-    border: 1px solid #ebe8e1
+    border: 1px solid #ebe8e1;
 }
 
 .mypage-avatar {
@@ -38,45 +38,49 @@
     flex: none;
     border-radius: 50%;
     background: #eae3d8;
-    color: #a58e70
+    color: #a58e70;
+}
+
+.mypage-profile-main {
+    flex: 1;
+    min-width: 0;
 }
 
 .mypage-profile small {
     font-size: 11px;
-    letter-spacing: .14em;
-    color: #a18b6f
+    letter-spacing: .08em;
+    color: #a18b6f;
 }
 
 .mypage-profile h2 {
     font-size: 22px;
-    margin: 6px 0
+    margin: 6px 0;
 }
 
 .mypage-profile p {
     font-size: 13px;
     color: #92908a;
-    margin: 0
+    margin: 0;
 }
 
-.mypage-profile>a,
-.mypage-library-top>a,
-.mypage-empty>a {
+.mypage-profile-edit {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-size: 13px;
+    margin-left: auto;
+    padding: 10px 14px;
+    border: 1px solid #d9d1c6;
+    border-radius: 8px;
+    background: #fff;
+    color: #514537;
     font-weight: 700;
-    color: #514537
-}
-
-.mypage-profile>a {
-    margin-left: auto
+    cursor: pointer;
 }
 
 .mypage-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px
+    gap: 18px;
 }
 
 .mypage-stats>div {
@@ -86,20 +90,20 @@
     background: #fff;
     border: 1px solid #ebe8e1;
     border-radius: 14px;
-    padding: 24px
+    padding: 24px;
 }
 
 .mypage-stats svg {
-    color: #b5a187
+    color: #b5a187;
 }
 
 .mypage-stats strong {
-    font-size: 31px
+    font-size: 31px;
 }
 
 .mypage-stats span {
     font-size: 13px;
-    color: #8c8982
+    color: #8c8982;
 }
 
 .mypage-library {
@@ -107,45 +111,56 @@
     border: 1px solid #ebe8e1;
     border-radius: 16px;
     padding: 30px;
-    margin-top: 24px
+    margin-top: 24px;
 }
 
 .mypage-library-top {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    align-items: center
+    align-items: center;
 }
 
 .mypage-library-top h2 {
     font-size: 21px;
-    margin: 0 0 8px
+    margin: 0 0 8px;
 }
 
 .mypage-library-top p {
     font-size: 13px;
     color: #928e87;
-    margin: 0
+    margin: 0;
+}
+
+.mypage-library-top>a,
+.mypage-empty>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #514537;
 }
 
 .mypage-tabs {
     display: flex;
     gap: 24px;
     border-bottom: 1px solid #ece9e3;
-    margin-top: 32px
+    margin-top: 32px;
 }
 
 .mypage-tabs button {
     border: 0;
     background: none;
     padding: 0 0 16px;
-    color: #92908a
+    color: #92908a;
+    cursor: pointer;
 }
 
 .mypage-tabs button.active {
     font-weight: 700;
     color: #252523;
-    border-bottom: 2px solid #252523
+    border-bottom: 2px solid #252523;
 }
 
 .mypage-empty {
@@ -154,60 +169,285 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    text-align: center
+    text-align: center;
 }
 
 .mypage-empty>svg {
-    color: #b9ae9e
+    color: #b9ae9e;
 }
 
 .mypage-empty h3 {
     font-size: 18px;
-    margin: 18px 0 5px
+    margin: 18px 0 5px;
 }
 
 .mypage-empty p {
     font-size: 13px;
-    color: #999
+    color: #999;
 }
 
 .mypage-empty a {
-    margin-top: 15px
+    margin-top: 15px;
 }
 
-@media(max-width:650px) {
+.mypage-asset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.mypage-asset-card {
+    overflow: hidden;
+    border: 1px solid #ebe8e1;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.mypage-asset-thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f3f2ef;
+    color: #b5a187;
+}
+
+.mypage-asset-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mypage-asset-info {
+    padding: 16px;
+}
+
+.mypage-asset-info>span {
+    font-size: 11px;
+    color: #a18b6f;
+    font-weight: 600;
+    letter-spacing: .06em;
+}
+
+.mypage-asset-info h3 {
+    margin: 8px 0;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+}
+
+.mypage-asset-info p {
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: #928e87;
+}
+
+.mypage-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mypage-card-actions button,
+.mypage-saved-item button,
+.mypage-edit-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 13px;
+    border: 1px solid #d9d1c6;
+    border-radius: 7px;
+    background: #fff;
+    color: #514537;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.mypage-card-actions button:hover,
+.mypage-saved-item button:hover,
+.mypage-edit-actions button:hover {
+    background: #f3f0eb;
+}
+
+.mypage-edit-actions button[type='submit'] {
+    background: #514537;
+    color: #fff;
+    border-color: #514537;
+}
+
+.mypage-edit-actions button[type='submit']:hover {
+    background: #3d342a;
+}
+
+.mypage-edit-actions button:disabled,
+.mypage-card-actions button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.mypage-edit-form,
+.mypage-asset-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mypage-edit-form {
+    margin-top: 16px;
+    max-width: 460px;
+}
+
+.mypage-edit-form label,
+.mypage-asset-edit label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #514537;
+}
+
+.mypage-edit-form input,
+.mypage-asset-edit input,
+.mypage-asset-edit select,
+.mypage-asset-edit textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d9d1c6;
+    border-radius: 8px;
+    background: #fff;
+    color: #252523;
+    font: inherit;
+}
+
+.mypage-edit-form input::placeholder {
+    color: #aaa39a;
+    opacity: .6;
+}
+
+.mypage-edit-form input:focus,
+.mypage-asset-edit input:focus,
+.mypage-asset-edit select:focus,
+.mypage-asset-edit textarea:focus {
+    outline: 2px solid #c5b399;
+    outline-offset: 1px;
+}
+
+.mypage-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.mypage-asset-edit {
+    max-width: 680px;
+    margin-top: 28px;
+}
+
+.mypage-asset-edit h3 {
+    font-size: 21px;
+    margin: 0;
+}
+
+.mypage-asset-edit>p {
+    font-size: 13px;
+    color: #928e87;
+    margin: 0 0 8px;
+}
+
+.mypage-asset-edit textarea {
+    resize: vertical;
+}
+
+.mypage-saved-list {
+    margin-top: 24px;
+}
+
+.mypage-saved-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid #ebe8e1;
+}
+
+.mypage-saved-item button {
+    margin-left: auto;
+}
+
+.mypage-notice {
+    margin-top: 16px;
+    font-size: 13px;
+    color: #805c33;
+}
+
+@media (max-width: 650px) {
     .mypage-page {
-        padding: 48px 20px 70px
+        padding: 48px 20px 70px;
     }
 
     .mypage-profile {
         flex-wrap: wrap;
-        padding: 20px
+        padding: 20px;
     }
 
-    .mypage-profile>a {
+    .mypage-profile-edit {
         margin-left: 0;
-        width: 100%
     }
 
     .mypage-stats {
-        gap: 9px
+        gap: 9px;
     }
 
     .mypage-stats>div {
-        padding: 15px
+        padding: 15px;
     }
 
     .mypage-stats strong {
-        font-size: 24px
+        font-size: 24px;
     }
 
     .mypage-library {
-        padding: 20px
+        padding: 20px;
     }
 
     .mypage-library-top {
-        align-items: start;
-        flex-direction: column
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .mypage-asset-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+    }
+
+    .mypage-asset-info {
+        padding: 12px;
+    }
+
+    .mypage-saved-item {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 400px) {
+    .mypage-stats>div {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .mypage-stats strong {
+        font-size: 21px;
+    }
+
+    .mypage-stats span {
+        font-size: 11px;
+    }
+
+    .mypage-asset-grid {
+        grid-template-columns: 1fr;
     }
 }
