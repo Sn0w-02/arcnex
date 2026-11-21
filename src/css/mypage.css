@@ -451,3 +451,168 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+/* 작품 수정 화면 */
+.mypage-asset-edit {
+    max-width: 100%;
+    margin-top: 28px;
+    gap: 24px;
+}
+
+.mypage-edit-heading h3 {
+    margin: 0 0 10px;
+    font-size: 21px;
+}
+
+.mypage-edit-heading p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #928e87;
+}
+
+/* 등록된 파일 미리보기 */
+.mypage-edit-preview {
+    padding: 24px;
+    border: 1px solid #ebe8e1;
+    border-radius: 14px;
+    background: #faf9f6;
+}
+
+.mypage-edit-preview-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.mypage-edit-preview-title h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #35312c;
+}
+
+.mypage-edit-preview-title span {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: #eee9e1;
+    color: #817464;
+    font-size: 11px;
+}
+
+/* 이미지 미리보기 */
+.mypage-edit-image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 260px;
+    max-height: 480px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #eeeae4;
+}
+
+.mypage-edit-image-preview img {
+    display: block;
+    max-width: 100%;
+    max-height: 480px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 3D 모델 미리보기 */
+.mypage-model-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.mypage-model-preview-item {
+    min-width: 0;
+}
+
+.mypage-model-preview-item h5 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: #514537;
+}
+
+.mypage-model-thumbnail,
+.mypage-model-viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 1px solid #e7e2d9;
+    border-radius: 10px;
+    background: #eeeae4;
+}
+
+.mypage-model-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.mypage-model-viewer model-viewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+}
+
+.mypage-preview-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    color: #a89d8e;
+    text-align: center;
+}
+
+.mypage-preview-empty p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.mypage-preview-guide {
+    margin: 16px 0 0;
+    color: #928e87;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* 작품 정보 입력 영역 */
+.mypage-edit-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 680px;
+}
+
+/* 반응형 */
+@media (max-width: 650px) {
+    .mypage-edit-preview {
+        padding: 16px;
+    }
+
+    .mypage-model-preview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mypage-model-thumbnail,
+    .mypage-model-viewer {
+        max-height: 360px;
+    }
+
+    .mypage-edit-image-preview {
+        min-height: 200px;
+    }
+}
