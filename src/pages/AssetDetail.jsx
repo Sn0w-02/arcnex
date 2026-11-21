@@ -42,9 +42,14 @@ export default function AssetDetail({ type = 'image' }) {
 
     useEffect(() => {
         if (!lightboxOpen) return;
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
         const onKeyDown = event => { if (event.key === 'Escape') setLightboxOpen(false); };
         window.addEventListener('keydown', onKeyDown);
-        return () => window.removeEventListener('keydown', onKeyDown);
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener('keydown', onKeyDown);
+        };
     }, [lightboxOpen]);
 
     const toggleLike = async () => {

@@ -562,3 +562,59 @@
     opacity: .55;
     cursor: wait;
 }
+
+/* 이미지 확대 모달 */
+.asset-detail__lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 70px 60px 40px;
+
+    background: rgba(20, 18, 17, 0.92);
+    overflow: hidden;
+}
+
+/* 이미지가 화면 밖으로 넘어가지 않도록 제한 */
+.asset-detail__lightbox img {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: calc(100vh - 110px);
+    max-height: calc(100dvh - 110px);
+
+    object-fit: contain;
+}
+
+/* 닫기 버튼 */
+.asset-detail__lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 2;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+    .asset-detail__lightbox {
+        padding: 70px 20px 30px;
+    }
+
+    .asset-detail__lightbox img {
+        max-height: calc(100vh - 100px);
+        max-height: calc(100dvh - 100px);
+    }
+
+    .asset-detail__lightbox-close {
+        top: 16px;
+        right: 16px;
+    }
+}
