@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Bookmark, FolderOpen, Image as ImageIcon, Box, UserRound, Pencil, Trash2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
+import '@google/model-viewer';
 import '../css/mypage.css';
 
 const categories = {
@@ -154,6 +155,17 @@ export default function MyPage() {
         return path ? supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl : '';
     };
 
+    const modelUrl = (item) => {
+        if (item.kind !== 'model' || !item.model_path) {
+            return '';
+        }
+
+        return supabase.storage
+            .from('model-files')
+            .getPublicUrl(item.model_path)
+            .data.publicUrl;
+    };
+
     return (
         <section className="mypage-page">
             <div className="mypage-container">
@@ -213,20 +225,185 @@ export default function MyPage() {
                     {notice && <p className="mypage-notice" role="status">{notice}</p>}
                     {loading ? (
                         <div className="mypage-empty"><p>라이브러리를 불러오는 중입니다...</p></div>
+
                     ) : editingAsset ? (
                         <form className="mypage-asset-edit" onSubmit={saveAsset}>
-                            <h3>{editingAsset.kind === 'image' ? '이미지' : '3D 모델'} 작품 수정</h3>
-                            <p>등록한 작품 정보를 변경합니다. 원본 파일은 유지됩니다.</p>
-                            <label>제목 *<input required maxLength={150} value={assetForm.title} onChange={(e) => setAssetForm((p) => ({ ...p, title: e.target.value }))} /></label>
-                            <label>카테고리 *<select required value={assetForm.category} onChange={(e) => setAssetForm((p) => ({ ...p, category: e.target.value }))}>
-                                <option value="">카테고리 선택</option>
-                                {categories[editingAsset.kind].map((category) => <option key={category} value={category}>{category}</option>)}
-                            </select></label>
-                            <label>설명<textarea rows={5} value={assetForm.description} onChange={(e) => setAssetForm((p) => ({ ...p, description: e.target.value }))} /></label>
-                            <label>태그<input value={assetForm.tags} onChange={(e) => setAssetForm((p) => ({ ...p, tags: e.target.value }))} placeholder="쉼표로 구분 (예: minimal, interior)" /></label>
+                            <div className="mypage-edit-heading">
+                                <h3>
+                                    {editingAsset.kind === 'image'
+                                        ? '이미지 작품 수정'
+                                        : '3D 모델 작품 수정'}
+                                </h3>
+                                <p>
+                                    등록된 파일을 확인하고 작품 정보를 수정할 수 있습니다.
+                                    원본 파일은 변경되지 않습니다.
+                                </p>
+                            </div>
+
+                            {/* 등록된 파일 미리보기 */}
+                            <div className="mypage-edit-preview">
+                                <div className="mypage-edit-preview-title">
+                                    <h4>등록된 파일 확인</h4>
+                                    <span>읽기 전용</span>
+                                </div>
+
+                                {editingAsset.kind === 'image' ? (
+                                    <div className="mypage-edit-image-preview">
+                                        {thumbnailUrl(editingAsset) ? (
+                                            <img
+                                                src={thumbnailUrl(editingAsset)}
+                                                alt={editingAsset.title}
+                                            />
+                                        ) : (
+                                            <div className="mypage-preview-empty">
+                                                <ImageIcon size={36} />
+                                                <p>등록된 이미지를 찾을 수 없습니다.</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div className="mypage-model-preview-grid">
+                                        {/* 등록된 썸네일 */}
+                                        <div className="mypage-model-preview-item">
+                                            <h5>등록된 썸네일</h5>
+
+                                            <div className="mypage-model-thumbnail">
+                                                {thumbnailUrl(editingAsset) ? (
+                                                    <img
+                                                        src={thumbnailUrl(editingAsset)}
+                                                        alt={`${editingAsset.title} 썸네일`}
+                                                    />
+                                                ) : (
+                                                    <div className="mypage-preview-empty">
+                                                        <ImageIcon size={32} />
+                                                        <p>썸네일 없음</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/* 실제 GLB 뷰어 */}
+                                        <div className="mypage-model-preview-item">
+                                            <h5>3D 모델 미리보기</h5>
+
+                                            <div className="mypage-model-viewer">
+                                                {modelUrl(editingAsset) ? (
+                                                    <model-viewer
+                                                        src={modelUrl(editingAsset)}
+                                                        alt={editingAsset.title}
+                                                        camera-controls
+                                                        touch-action="pan-y"
+                                                        interaction-prompt="auto"
+                                                        shadow-intensity="1"
+                                                        exposure="1"
+                                                        loading="eager"
+                                                        style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            background: 'transparent',
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <div className="mypage-preview-empty">
+                                                        <Box size={36} />
+                                                        <p>3D 파일을 찾을 수 없습니다.</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {editingAsset.kind === 'model' && (
+                                    <p className="mypage-preview-guide">
+                                        마우스 드래그로 회전하고 휠로 확대·축소할 수 있습니다.
+                                        모델의 원본 방향은 유지됩니다.
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* 기존 작품 정보 수정 */}
+                            <div className="mypage-edit-fields">
+                                <label>
+                                    제목 *
+                                    <input
+                                        required
+                                        maxLength={150}
+                                        value={assetForm.title}
+                                        onChange={(e) =>
+                                            setAssetForm((prev) => ({
+                                                ...prev,
+                                                title: e.target.value,
+                                            }))
+                                        }
+                                    />
+                                </label>
+
+                                <label>
+                                    카테고리 *
+                                    <select
+                                        required
+                                        value={assetForm.category}
+                                        onChange={(e) =>
+                                            setAssetForm((prev) => ({
+                                                ...prev,
+                                                category: e.target.value,
+                                            }))
+                                        }
+                                    >
+                                        <option value="">카테고리 선택</option>
+                                        {categories[editingAsset.kind].map((category) => (
+                                            <option key={category} value={category}>
+                                                {category}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+
+                                <label>
+                                    설명
+                                    <textarea
+                                        rows={5}
+                                        value={assetForm.description}
+                                        onChange={(e) =>
+                                            setAssetForm((prev) => ({
+                                                ...prev,
+                                                description: e.target.value,
+                                            }))
+                                        }
+                                    />
+                                </label>
+
+                                <label>
+                                    태그
+                                    <input
+                                        value={assetForm.tags}
+                                        onChange={(e) =>
+                                            setAssetForm((prev) => ({
+                                                ...prev,
+                                                tags: e.target.value,
+                                            }))
+                                        }
+                                        placeholder="쉼표로 구분 (예: minimal, interior)"
+                                    />
+                                </label>
+                            </div>
+
                             <div className="mypage-edit-actions">
-                                <button type="button" disabled={saving} onClick={() => { setEditingAsset(null); setNotice(''); }}>취소</button>
-                                <button type="submit" disabled={saving}>{saving ? '저장 중...' : '변경사항 저장'}</button>
+                                <button
+                                    type="button"
+                                    disabled={saving}
+                                    onClick={() => {
+                                        setEditingAsset(null);
+                                        setNotice('');
+                                    }}
+                                >
+                                    취소
+                                </button>
+
+                                <button type="submit" disabled={saving}>
+                                    {saving ? '저장 중...' : '변경사항 저장'}
+                                </button>
                             </div>
                         </form>
                     ) : tab === 'uploads' && uploads.length ? (
