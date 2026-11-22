@@ -616,3 +616,32 @@
         min-height: 200px;
     }
 }
+
+/* 저장한 에셋 카드 */
+.mypage-saved-card {
+    transition: border-color .2s ease, transform .2s ease;
+}
+
+.mypage-saved-card:hover {
+    border-color: #d9d1c6;
+    transform: translateY(-2px);
+}
+
+.mypage-saved-card .mypage-asset-info {
+    display: flex;
+    flex-direction: column;
+    min-height: 145px;
+}
+
+.mypage-saved-card .mypage-asset-info p {
+    margin-bottom: 16px;
+}
+
+.mypage-saved-card .mypage-card-actions {
+    margin-top: auto;
+}
+
+.mypage-saved-card .mypage-card-actions button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
