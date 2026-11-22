@@ -1,5 +1,7 @@
+
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { supabase } from './supabase';
 import { fetchAssets, fetchFavoriteIds, setFavorite } from './assetApi';
 
 export function useAssetList(type) {
@@ -17,8 +19,17 @@ export function useAssetList(type) {
         let active = true;
         setLoading(true);
         setError('');
-        Promise.all([fetchAssets(type), fetchFavoriteIds(type, user?.id)])
-            .then(([items, ids]) => { if (active) { setAssets(items); setLiked(ids); } })
+        const key = type === 'image' ? 'gallery_asset_id' : 'model_asset_id';
+        Promise.all([
+            fetchAssets(type), fetchFavoriteIds(type, user?.id),
+            supabase.from('favorites').select(key).not(key, 'is', null)
+        ])
+            .then(([items, ids, counts]) => {
+                if (counts.error) throw counts.error;
+                const totals = {};
+                (counts.data ?? []).forEach(row => { if (row[key]) totals[row[key]] = (totals[row[key]] || 0) + 1; });
+                if (active) { setAssets(items.map(asset => ({ ...asset, likes: totals[asset.id] || 0 }))); setLiked(ids); }
+            })
             .catch(err => { if (active) setError(err.message); })
             .finally(() => { if (active) setLoading(false); });
         return () => { active = false; };
