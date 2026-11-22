@@ -221,3 +221,22 @@
         padding: 24px
     }
 }
+
+.upload-thumbnail-select {
+    margin-bottom: 14px;
+}
+
+.upload-model-preview-grid {
+    display: grid;
+    gap: 14px;
+}
+
+.upload-model-preview-grid h4 {
+    font-size: 13px;
+    margin: 0 0 8px;
+    color: #77716a;
+}
+
+.upload-model-preview-grid .upload-preview-stage {
+    height: 210px;
+}
