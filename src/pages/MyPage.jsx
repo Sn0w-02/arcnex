@@ -35,7 +35,7 @@ export default function MyPage() {
             supabase.from('accounts').select('username').eq('id', user.id).maybeSingle(),
             supabase.from('gallery_assets').select('*').eq('user_id', user.id).order('created_at', { ascending: false }),
             supabase.from('model_assets').select('*').eq('user_id', user.id).order('created_at', { ascending: false }),
-            supabase.from('favorites').select('id,gallery_asset_id,model_asset_id').eq('user_id', user.id),
+            supabase.from('favorites').select(`id, gallery_asset_id, model_asset_id, gallery_assets (id, title, category, image_path), model_assets (id, title, category, thumbnail_path)`).eq('user_id', user.id),
         ]);
         const errors = [account, gallery, model, saved].filter((result) => result.error).map((result) => result.error.message);
         if (errors.length) setNotice(`데이터 조회 실패: ${errors.join(' / ')}`);
@@ -428,11 +428,32 @@ export default function MyPage() {
                             })}
                         </div>
                     ) : tab === 'saved' && favorites.length ? (
-                        <div className="mypage-saved-list">
-                            {favorites.map((item) => <div className="mypage-saved-item" key={item.id}>
-                                <Bookmark size={18} /><span>저장한 에셋</span>
-                                <button type="button" disabled={saving} onClick={() => removeFavorite(item.id)}>저장 취소</button>
-                            </div>)}
+                        <div className="mypage-asset-grid">
+                            {favorites.map((favorite) => {
+                                const isImage = Boolean(favorite.gallery_asset_id);
+                                const asset = isImage ? favorite.gallery_assets : favorite.model_assets;
+                                const kind = isImage ? 'image' : 'model';
+                                const url = asset ? thumbnailUrl({ ...asset, kind }) : '';
+
+                                return (
+                                    <article className="mypage-asset-card mypage-saved-card" key={favorite.id}>
+                                        <div className="mypage-asset-thumbnail">
+                                            {url ? <img src={url} alt={asset?.title || '저장한 에셋'} loading="lazy" />
+                                                : isImage ? <ImageIcon size={32} /> : <Box size={32} />}
+                                        </div>
+                                        <div className="mypage-asset-info">
+                                            <span>{isImage ? 'IMAGE' : '3D MODEL'}</span>
+                                            <h3>{asset?.title || '삭제되었거나 조회할 수 없는 에셋'}</h3>
+                                            <p>{asset?.category || '미분류'}</p>
+                                            <div className="mypage-card-actions">
+                                                <button type="button" disabled={saving} onClick={() => removeFavorite(favorite.id)}>
+                                                    <Bookmark size={15} /> 저장 취소
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </article>
+                                );
+                            })}
                         </div>
                     ) : (
                         <div className="mypage-empty">

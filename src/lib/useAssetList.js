@@ -43,6 +43,9 @@ export function useAssetList(type) {
         try {
             await setFavorite(type, user.id, id, enabled);
             setLiked(current => enabled ? [...current, id] : current.filter(item => item !== id));
+            setAssets(current => current.map(asset => asset.id === id
+                ? { ...asset, likes: Math.max(0, (Number(asset.likes) || 0) + (enabled ? 1 : -1)) }
+                : asset));
         } catch (err) { setError(`저장 처리 실패: ${err.message}`); }
         finally { setBusy(null); }
     };
